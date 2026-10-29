@@ -16,11 +16,12 @@ public class DeviceSetupRequest extends AbstractSupportRequest {
 	@Override
 	public int resolveFor(Technician technician) {
 		if (technician == null) throw new IllegalArgumentException("Technician cannot be null");
+		if (isResolved()) throw new IllegalStateException("Already resolved");
 		
 		int points = getBasePoints() * deviceCount;
 		
-		markResolved();
 		technician.addPoints(points);
+		markResolved();
 		
 		return points;
 	}

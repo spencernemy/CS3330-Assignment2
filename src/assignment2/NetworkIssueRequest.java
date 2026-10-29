@@ -16,13 +16,14 @@ public class NetworkIssueRequest extends AbstractSupportRequest {
 	@Override
 	public int resolveFor(Technician technician) {
 		if (technician == null) throw new IllegalArgumentException("Technician cannot be null");
+		if (isResolved()) throw new IllegalStateException("Already resolved");
 		
 		// Linear rule was chosen for points as it is a clean and easily understandable method
 		// to give points to issues based on how many users are affected
 		int points = getBasePoints() + affectedUsers;
 		
-		markResolved();
 		technician.addPoints(points);
+		markResolved();
 		
 		return points;
 	}
