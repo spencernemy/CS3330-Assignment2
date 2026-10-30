@@ -38,7 +38,7 @@ public class HelpDesk {
         }
         if (list.contains(requestsById.get(requestId))) {
             throw new IllegalArgumentException("Technicican already has request");
-            
+            //rule that technicians cant have duplicate assignment requests
         }
         list.add(requestsById.get(requestId));
     }
